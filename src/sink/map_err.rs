@@ -62,3 +62,12 @@ impl<S: Stream, F> Stream for SinkMapErr<S, F> {
         self.sink.poll()
     }
 }
+
+impl <S: Clone, F: Clone> Clone for SinkMapErr<S, F> {
+    fn clone(&self) -> SinkMapErr<S, F> {
+        SinkMapErr {
+            sink: self.sink.clone(),
+            f: self.f.clone(),
+        }
+    }
+}
